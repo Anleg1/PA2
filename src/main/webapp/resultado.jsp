@@ -34,10 +34,23 @@
         todoOk = false;
     }
 
-    // Conversión de números
-    int cantidad = (cantidadStr != null && !cantidadStr.isEmpty()) ? Integer.parseInt(cantidadStr) : 0;
-    double precio = (precioStr != null && !precioStr.isEmpty()) ? Double.parseDouble(precioStr) : 0.0;
-    double total = cantidad * precio;
+    // 3. Conversión segura de números (usando Double para evitar conflictos con decimales)
+    double cantidad = 0.0;
+    double precio = 0.0;
+    double total = 0.0;
+
+    try {
+        if (cantidadStr != null && !cantidadStr.trim().isEmpty()) {
+            cantidad = Double.parseDouble(cantidadStr);
+        }
+        if (precioStr != null && !precioStr.trim().isEmpty()) {
+            precio = Double.parseDouble(precioStr);
+        }
+        total = cantidad * precio;
+    } catch (NumberFormatException e) {
+        todoOk = false;
+        mensajeValidacion = "Error: Formato de número inválido en cantidad o precio.";
+    }
 %>
 <!DOCTYPE html>
 <html lang="es">
@@ -52,6 +65,7 @@
         .exito { color: #16a34a; font-weight: bold; }
         .error { color: #dc2626; font-weight: bold; }
         a { display: inline-block; margin-top: 20px; text-decoration: none; background: #2563eb; color: white; padding: 10px 20px; border-radius: 6px; }
+        a:hover { background: #1d4ed8; }
     </style>
 </head>
 <body>
@@ -64,8 +78,8 @@
         <p><strong>Cliente (toUpperCase + trim):</strong> <%= clienteLimpio %></p>
         <p><strong>Producto (trim):</strong> <%= productoLimpio %></p>
         <p><strong>Cantidad:</strong> <%= cantidad %></p>
-        <p><strong>Precio Unitario:</strong> S/ <%= precio %></p>
-        <p><strong>Total a Pagar:</strong> S/ <%= total %></p>
+        <p><strong>Precio Unitario:</strong> S/ <%= String.format("%.2f", precio) %></p>
+        <p><strong>Total a Pagar:</strong> S/ <%= String.format("%.2f", total) %></p>
 
         <p class="exito"><%= mensajeValidacion %></p>
     <% } else { %>
