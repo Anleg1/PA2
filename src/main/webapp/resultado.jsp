@@ -1,13 +1,43 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-<%@ page import="modelo.Cotizador" %>
 <%
     // 1. Recogemos los datos enviados desde index.jsp
-    String cliInput = request.getParameter("cliente");
-    String prodInput = request.getParameter("producto");
-    String cantInput = request.getParameter("cantidad");
-    String precInput = request.getParameter("precio");
+    String clienteInput = request.getParameter("cliente");
+    String productoInput = request.getParameter("producto");
+    String cantidadStr = request.getParameter("cantidad");
+    String precioStr = request.getParameter("precio");
 
-    // 2. Creamos el objeto de nuestra clase;
+    // Variables limpias
+    String clienteLimpio = "";
+    String productoLimpio = "";
+    String mensajeValidacion = "Cotización procesada correctamente.";
+    boolean todoOk = true;
+
+    // 2. Aplicación directa de los métodos de la clase String requeridos
+    if (clienteInput != null && !clienteInput.trim().isEmpty()) {
+        // trim() elimina espacios y toUpperCase() pasa todo a mayúsculas
+        clienteLimpio = clienteInput.trim().toUpperCase();
+    } else {
+        todoOk = false;
+        mensajeValidacion = "Error: El nombre del cliente es obligatorio.";
+    }
+
+    if (productoInput != null && !productoInput.trim().isEmpty()) {
+        // trim() limpia espacios
+        productoLimpio = productoInput.trim();
+
+        // length() valida la longitud del texto
+        if (productoLimpio.length() < 3) {
+            todoOk = false;
+            mensajeValidacion = "Advertencia: La descripción del producto es muy corta (mínimo 3 caracteres).";
+        }
+    } else {
+        todoOk = false;
+    }
+
+    // Conversión de números
+    int cantidad = (cantidadStr != null && !cantidadStr.isEmpty()) ? Integer.parseInt(cantidadStr) : 0;
+    double precio = (precioStr != null && !precioStr.isEmpty()) ? Double.parseDouble(precioStr) : 0.0;
+    double total = cantidad * precio;
 %>
 <!DOCTYPE html>
 <html lang="es">
@@ -19,10 +49,9 @@
         .tarjeta { background: white; max-width: 500px; margin: 0 auto; padding: 30px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
         h2 { color: #17365d; margin-top: 0; }
         p { font-size: 16px; line-height: 1.5; }
-        .error { color: #dc2626; font-weight: bold; }
         .exito { color: #16a34a; font-weight: bold; }
+        .error { color: #dc2626; font-weight: bold; }
         a { display: inline-block; margin-top: 20px; text-decoration: none; background: #2563eb; color: white; padding: 10px 20px; border-radius: 6px; }
-        a:hover { background: #1d4ed8; }
     </style>
 </head>
 <body>
@@ -30,17 +59,17 @@
 <div class="tarjeta">
     <h2>Resultado de la Cotización</h2>
 
-    <% if (miCotizacion.isEsValido()) { %>
-        <!-- Mostramos los datos limpios gracias a los métodos de la clase String -->
-        <p><strong>Cliente (Procesado con String):</strong> <%= miCotizacion.getCliente() %></p>
-        <p><strong>Producto (Limpio):</strong> <%= miCotizacion.getProducto() %></p>
-        <p><strong>Cantidad:</strong> <%= miCotizacion.getCantidad() %></p>
-        <p><strong>Precio Unitario:</strong> S/ <%= miCotizacion.getPrecio() %></p>
-        <p><strong>Total a Pagar:</strong> S/ <%= miCotizacion.calcularTotal() %></p>
+    <% if (todoOk) { %>
+        <!-- Mostramos los datos limpios aplicando métodos String -->
+        <p><strong>Cliente (toUpperCase + trim):</strong> <%= clienteLimpio %></p>
+        <p><strong>Producto (trim):</strong> <%= productoLimpio %></p>
+        <p><strong>Cantidad:</strong> <%= cantidad %></p>
+        <p><strong>Precio Unitario:</strong> S/ <%= precio %></p>
+        <p><strong>Total a Pagar:</strong> S/ <%= total %></p>
 
-        <p class="exito"><%= miCotizacion.getMensajeValidacion() %></p>
+        <p class="exito"><%= mensajeValidacion %></p>
     <% } else { %>
-        <p class="error"><%= miCotizacion.getMensajeValidacion() %></p>
+        <p class="error"><%= mensajeValidacion %></p>
     <% } %>
 
     <a href="index.jsp">Volver al cotizador</a>
