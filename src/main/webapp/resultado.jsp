@@ -39,6 +39,8 @@
     double precio = 0.0;
     double total = 0.0;
 
+    String mensajeDescuento = "Sin descuento (Precio regular)";
+
     try {
         if (cantidadStr != null && !cantidadStr.trim().isEmpty()) {
             cantidad = Double.parseDouble(cantidadStr);
@@ -46,7 +48,26 @@
         if (precioStr != null && !precioStr.trim().isEmpty()) {
             precio = Double.parseDouble(precioStr);
         }
-        total = cantidad * precio;
+    // CALCULOS CON MATH
+        double subtotalBruto = cantidad * precio;
+        subtotalBruto = Math.abs(subtotalBruto); //para evitar que sea negativo y por si el min=1 falla
+
+        double totalFinal = subtotalBruto;
+
+                //  El descuento por unidades solo aplica si compra 12 o más unidades
+                if (cantidad >= 12) {
+                    double factorDescuento = Math.pow(0.95, cantidad - 11); // Math.pow
+                    double subtotalConDescuento = subtotalBruto * factorDescuento;
+                    totalFinal = Math.max(subtotalConDescuento, subtotalBruto * 0.80); // Math.max
+
+                    // Actualizamos el mensaje porque SÍ hubo descuento
+                    mensajeDescuento = "¡Descuento por unidades aplicado (A partir de 12 unidades)!";
+                } else {
+                    totalFinal = subtotalBruto;
+                }
+
+        total = Math.round(totalFinal * 100.0) / 100.0;
+
     } catch (NumberFormatException e) {
         todoOk = false;
         mensajeValidacion = "Error: Formato de número inválido en cantidad o precio.";
@@ -66,6 +87,10 @@
         .error { color: #dc2626; font-weight: bold; }
         a { display: inline-block; margin-top: 20px; text-decoration: none; background: #2563eb; color: white; padding: 10px 20px; border-radius: 6px; }
         a:hover { background: #1d4ed8; }
+        .info-descuento {
+                color: #2563eb;
+                font-size: 14px;
+            }
     </style>
 </head>
 <body>
@@ -81,6 +106,8 @@
         <p><strong>Precio Unitario:</strong> S/ <%= String.format("%.2f", precio) %></p>
         <p><strong>Total a Pagar:</strong> S/ <%= String.format("%.2f", total) %></p>
 
+        <p class="info-descuento"><em><%= mensajeDescuento %></em></p>
+
         <p class="exito"><%= mensajeValidacion %></p>
     <% } else { %>
         <p class="error"><%= mensajeValidacion %></p>
@@ -91,5 +118,3 @@
 
 </body>
 </html>
-
-// xd lol
