@@ -108,7 +108,7 @@
 <main class="contenedor">
     <h2>Datos de la cotización</h2>
 
-    <form action="procesar" method="post">
+    <form action="resultado.jsp" method="post">
 
         <div class="campo">
             <label for="cliente">Nombre del cliente</label>
