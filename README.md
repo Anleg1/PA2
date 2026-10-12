@@ -14,7 +14,7 @@ Miguel Angel Caycho Roque – Lógica matemática y aplicación de métodos de l
 
 Jesús Alejandro MarcanoMéndez – Validaciones y manipulación de texto usando métodos de la clase String.
 
-Jorge Jerson Benito Mayhua – Pruebas, control de calidad e integración de los módulos
+Jorge Jerson Benito Mayhua – Pruebas, control de calidad e integración de los módulos y redacción del archivo README
 
 Características Técnicas Implementadas
 Flujo Web: Recepción de parámetros mediante el método POST desde index.jsp hacia resultado.jsp.
