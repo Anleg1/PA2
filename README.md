@@ -1,8 +1,13 @@
 PA2 - Programación Orientada a Objetos: Cotizador Web
+
+
 Descripción del Trabajo
+
+
 Aplicación web desarrollada con JSP (JavaServer Pages) y Apache Tomcat que implementa una mini aplicación de cotización. El sistema recibe datos por formulario web (index.jsp), realiza validaciones estrictas y transformaciones de texto utilizando los métodos de la clase String, efectúa cálculos matemáticos avanzados aplicando métodos de la clase Math, y muestra los resultados detallados en una vista de salida (resultado.jsp).
 
 Integrantes del Equipo
+
 Franco Andrés Diaz Carreal – Vista JSP y diseño del formulario de entrada.
 
 Miguel Angel Caycho Roque – Lógica matemática y aplicación de métodos de la clase Math.
