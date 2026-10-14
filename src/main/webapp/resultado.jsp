@@ -39,6 +39,8 @@
     double precio = 0.0;
     double total = 0.0;
 
+    int numeroCoti = (int)(Math.random() * 9000) + 1000;
+
     String mensajeDescuento = "Sin descuento (Precio regular)";
 
     try {
@@ -105,6 +107,7 @@
         <p><strong>Cantidad:</strong> <%= cantidad %></p>
         <p><strong>Precio Unitario:</strong> S/ <%= String.format("%.2f", precio) %></p>
         <p><strong>Total a Pagar:</strong> S/ <%= String.format("%.2f", total) %></p>
+        <p><strong>Cotizacion N°:</strong> #<%= numeroCoti %></p>
 
         <p class="info-descuento"><em><%= mensajeDescuento %></em></p>
 
