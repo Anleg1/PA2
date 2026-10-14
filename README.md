@@ -55,7 +55,7 @@ Verificar que Java (JDK) esté instalado ejecutando en la ventana de comandos:
 - Cantidad 3 y precio 25.50: total S/ 76.50, sin descuento.
 - Cantidad 12 y precio 10: total S/ 114.00, con descuento por unidades.
 - Cantidad 20 y precio 10: total S/ 160.00, se aplica el descuento máximo.
-- Producto "Mo": muestra el aviso de descripción muy corta.
+- Producto "mo": muestra el aviso de descripción muy corta.
 
 ### Notas
 - Si la ventana de Tomcat se cierra apenas se abre, configurar la variable de entorno `JAVA_HOME` con la ruta del JDK.
@@ -66,6 +66,6 @@ Las capturas de la aplicación funcionando están en la carpeta [evidencias](evi
 1. [Formulario de entrada](evidencias/01-formulario.png)
 2. [Resultado sin descuento](evidencias/02-resultado-normal.png)
 3. [Resultado con descuento por unidades](evidencias/03-resultado-descuento.png)
-4. [Validación de texto](evidencias/04-error-validacion.png)eg
+4. [Validación de texto](evidencias/04-error-validacion.png)
 
-## Enlace del Video de Exposición: 
+## Enlace del Video de Exposición
