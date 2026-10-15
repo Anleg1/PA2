@@ -69,3 +69,4 @@ Las capturas de la aplicación funcionando están en la carpeta [evidencias](evi
 4. [Validación de texto](evidencias/04-error-validacion.png)
 
 ## Enlace del Video de Exposición
+https://youtu.be/tRaMt-iWLgI?si=oeWb059UUo8CEr-7
